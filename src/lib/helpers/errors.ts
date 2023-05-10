@@ -1,4 +1,5 @@
 import type { ZodIssue } from 'zod';
+import { tick } from 'svelte';
 
 type DotPrefix<T extends string> = T extends '' ? '' : `.${T}`;
 
@@ -74,4 +75,35 @@ export function flattenErrors<Input extends object>(
   }, {} as ErrorList<Input>);
 
   return result;
+}
+
+/**
+ * Scrolls an error wrapper into view if found, otherwise returns false.
+ *
+ * @returns A promise with boolean indicating whether the error wrapper was found and scrolled into view.
+ *
+ * @example
+ * ```typescript
+ * import { scrollErrorIntoView } from "sveltevely-ugly-bundle";
+ *
+ * const errorScrolled = await scrollErrorIntoView();
+ * if (errorScrolled) {
+ *   console.log("Error wrapper scrolled into view");
+ * } else {
+ *   console.log("No error wrapper found");
+ * }
+ * ```
+ */
+export async function scrollErrorIntoView() {
+  await tick();
+
+  const errorEl = document.querySelector('.error');
+
+  if (errorEl) {
+    errorEl.scrollIntoView({ block: 'center' });
+
+    return true;
+  } else {
+    return false;
+  }
 }

@@ -5,4 +5,9 @@ export { default as TableBody } from './components/tables/TableBody.svelte';
 export { default as TableBodyRow } from './components/tables/TableBodyRow.svelte';
 export { default as TableBodyCell } from './components/tables/TableBodyCell.svelte';
 
-export { flattenErrors, type ErrorList, type WithErrors } from './helpers/errors.js';
+export {
+  flattenErrors,
+  scrollErrorIntoView,
+  type ErrorList,
+  type WithErrors
+} from './helpers/errors.js';
