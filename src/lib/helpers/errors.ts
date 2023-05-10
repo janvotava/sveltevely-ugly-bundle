@@ -13,6 +13,22 @@ type NestedKeyOf<T> = (
   ? Extract<D, string>
   : never;
 
+/**
+ * Represents a flattened object of validation errors.
+ *
+ * @typeParam T - The type of the object for which errors are being flattened.
+ *
+ * @example
+ * ```typescript
+ * import type { FlattenedErrors } from 'sveltevely-ugly-bundle';
+ *
+ * const errors: FlattenedErrors<MyFormType> = {
+ *   'name': ['Name is required'],
+ *   'address.street': ['Street is required'],
+ *   'address.city': ['City is required']
+ * };
+ * ```
+ */
 export type FlattenedErrors<T extends object> = {
   [property in NestedKeyOf<T>]?: string[];
 };
