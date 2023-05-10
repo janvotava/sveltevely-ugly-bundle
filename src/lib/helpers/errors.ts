@@ -13,12 +13,12 @@ type NestedKeyOf<T> = (
   ? Extract<D, string>
   : never;
 
-export type ErrorList<T extends object> = {
+export type FlattenedErrors<T extends object> = {
   [property in NestedKeyOf<T>]?: string[];
 };
 
 interface ErrorsBundle<T extends object> {
-  errors: ErrorList<T>;
+  errors: FlattenedErrors<T>;
 }
 
 export type WithErrors<T extends object> = T & ErrorsBundle<T>;
@@ -59,20 +59,20 @@ export type WithErrors<T extends object> = T & ErrorsBundle<T>;
 export function flattenErrors<Input extends object>(
   errors: ZodIssue[] | null,
   translator: (error: ZodIssue) => string = (error) => error.message
-): ErrorList<Input> {
+): FlattenedErrors<Input> {
   if (!errors) {
     return {};
   }
 
   const result = errors.reduce((result, error) => {
-    const path = error.path.join('.') as keyof ErrorList<Input>;
+    const path = error.path.join('.') as keyof FlattenedErrors<Input>;
     const message = translator(error);
 
     const existing = result[path] || [];
     result[path] = [...existing, message];
 
     return result;
-  }, {} as ErrorList<Input>);
+  }, {} as FlattenedErrors<Input>);
 
   return result;
 }

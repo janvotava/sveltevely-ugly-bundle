@@ -8,6 +8,6 @@ export { default as TableBodyCell } from './components/tables/TableBodyCell.svel
 export {
   flattenErrors,
   scrollErrorIntoView,
-  type ErrorList,
+  type FlattenedErrors,
   type WithErrors
 } from './helpers/errors.js';
