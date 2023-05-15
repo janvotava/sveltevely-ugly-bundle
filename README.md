@@ -20,6 +20,20 @@ To install the Sveltevely Ugly Bundle, simply use your favorite package manager:
 npm install sveltevely-ugly-bundle
 ```
 
+If you want to use Tailwind CSS with our components, you'll need to enable scanning for Tailwind directives in your `tailwind.config.cjs` file:
+
+```js
+	content: [
+		'./src/**/*.{html,js,svelte,ts}',
+
+		// Add this line to your content array
+		require('path').join(require.resolve(
+			'sveltevely-ugly-bundle'),
+			'../**/*.{html,js,svelte,ts}'
+		)
+	],
+```
+
 ## Contributing
 
 If you're feeling adventurous and want to add your own ugly components or helpful helpers to the mix, we'd love to see your contributions! Fork this repository, make your changes, and submit a pull request. Let's make the Sveltevely Ugly Bundle even uglier together! 😂
